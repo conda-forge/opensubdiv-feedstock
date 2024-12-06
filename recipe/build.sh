@@ -17,7 +17,7 @@ cmake ${CMAKE_ARGS} -GNinja .. \
       -DNO_CUDA:BOOL=ON \
       -DNO_OPENCL:BOOL=ON \
       -DNO_CLEW:BOOL=ON \
-      -DNO_OPENGL:BOOL=ON \
+      -DNO_OPENGL:BOOL=OFF \
       -DNO_METAL:BOOL=ON \
       -DNO_MACOS_FRAMEWORK:BOOL=ON \
       -DNO_DX=ON \
@@ -25,7 +25,8 @@ cmake ${CMAKE_ARGS} -GNinja .. \
       -DNO_GLTESTS:BOOL=OFF \
       -DNO_GLEW:BOOL=ON \
       -DNO_GLFW:BOOL=ON \
-      -DNO_GLFW_X11:BOOL=ON
+      -DNO_GLFW_X11:BOOL=ON \
+      -DOPENGL_FOUND:BOOL=ON
 
 cmake --build . --config Release
 
