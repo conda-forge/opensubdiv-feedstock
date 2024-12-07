@@ -14,7 +14,7 @@ source:
       - enable_shared_library_on_windows.patch
 
 build:
-  number: 0
+  number: 1
   # SONAME is x.x.x
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
@@ -27,6 +27,7 @@ requirements:
     - ninja
     - cmake
   host:
+    - libgl-devel  # [linux]
     - tbb-devel
 
 
@@ -41,6 +42,9 @@ test:
     - if not exist %PREFIX%\\Library\\lib\\osdCPU_import.lib exit 1  # [win]
     - if not exist %PREFIX%\\Library\\bin\\osdCPU.dll exit 1  # [win]
     - if not exist %PREFIX%\\Library\\lib\\cmake\\OpenSubdiv\\OpenSubdivConfig.cmake exit 1  # [win]
+    # Check OpenGL was enabled
+    - test -f ${PREFIX}/include/opensubdiv/osd/glslPatchShaderSource.h  # [not win]
+    - if not exist %PREFIX%\\Library\\include\\opensubdiv\\osd\\glslPatchShaderSource.h exit 1  # [win]
 
 about:
   home: https://github.com/PixarAnimationStudios/OpenSubdiv
