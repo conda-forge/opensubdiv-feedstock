@@ -30,7 +30,6 @@ requirements:
     - libgl-devel  # [linux]
     - tbb-devel
 
-
 test:
   commands:
     - test -f ${PREFIX}/include/opensubdiv/far/topologyRefiner.h  # [not win]
@@ -42,9 +41,11 @@ test:
     - if not exist %PREFIX%\\Library\\lib\\osdCPU_import.lib exit 1  # [win]
     - if not exist %PREFIX%\\Library\\bin\\osdCPU.dll exit 1  # [win]
     - if not exist %PREFIX%\\Library\\lib\\cmake\\OpenSubdiv\\OpenSubdivConfig.cmake exit 1  # [win]
-    # Check OpenGL was enabled
+    # Check OpenGL is enabled
     - test -f ${PREFIX}/include/opensubdiv/osd/glslPatchShaderSource.h  # [not win]
     - if not exist %PREFIX%\\Library\\include\\opensubdiv\\osd\\glslPatchShaderSource.h exit 1  # [win]
+    # Check Metal is enabled
+    - test -f ${PREFIX}/include/opensubdiv/osd/mtlPatchShaderSource.h  # [osx]
 
 about:
   home: https://github.com/PixarAnimationStudios/OpenSubdiv
