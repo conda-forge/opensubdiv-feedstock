@@ -1,5 +1,11 @@
 #!/bin/sh
 
+if [[ "${target_platform}" == osx-* ]]; then
+  export OPENSUBDIV_NO_METAL=OFF
+else
+  export OPENSUBDIV_NO_METAL=ON
+fi
+
 rm -rf build
 mkdir build
 cd build
@@ -7,7 +13,7 @@ cmake ${CMAKE_ARGS} -GNinja .. \
       -DCMAKE_BUILD_TYPE=Release \
       -DBUILD_TESTING:BOOL=ON \
       -DBUILD_SHARED_LIBS:BOOL=ON \
-      -DNO_EXAMPLES:BOOL=OFF \
+      -DNO_EXAMPLES:BOOL=ON \
       -DNO_TUTORIALS:BOOL=OFF \
       -DNO_REGRESSION:BOOL=OFF \
       -DNO_PTEX:BOOL=ON \
@@ -18,7 +24,7 @@ cmake ${CMAKE_ARGS} -GNinja .. \
       -DNO_OPENCL:BOOL=ON \
       -DNO_CLEW:BOOL=ON \
       -DNO_OPENGL:BOOL=OFF \
-      -DNO_METAL:BOOL=ON \
+      -DNO_METAL:BOOL=$OPENSUBDIV_NO_METAL \
       -DNO_MACOS_FRAMEWORK:BOOL=ON \
       -DNO_DX=ON \
       -DNO_TESTS:BOOL=OFF \
